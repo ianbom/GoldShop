@@ -1,5 +1,5 @@
 import { Link } from '@inertiajs/react';
-import { FileText, LayoutGrid, Package, Receipt, ScrollText, ShoppingBag, Store, Users } from 'lucide-react';
+import { FileText, LayoutGrid, Package, Receipt, ScrollText, Settings, ShoppingBag, Store, Users } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
@@ -29,13 +29,14 @@ const mainNavItems: NavItem[] = [
     { title: 'Document Templates', href: '/document-templates', icon: FileText },
     { title: 'Generated Documents', href: '/documents', icon: ScrollText },
     { title: 'Reports', href: '/reports/purchases', icon: Store },
+    { title: 'Settings', href: '/settings/profile', icon: Settings },
 ];
 
 const footerNavItems: NavItem[] = [];
 
 export function AppSidebar() {
     return (
-        <Sidebar collapsible="icon" variant="inset">
+        <Sidebar collapsible="icon" variant="inset" className="border-r-0">
             <SidebarHeader>
                 <SidebarMenu>
                     <SidebarMenuItem>

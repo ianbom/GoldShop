@@ -1,5 +1,5 @@
 import { Head, useForm } from '@inertiajs/react';
-import { PageHeader, money } from '@/components/gold/shared';
+import { PageHeader, Surface, money } from '@/components/gold/shared';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -80,15 +80,15 @@ export default function Create({ inventory }: any) {
         <>
             <Head title="Create Sale" />
             <form
-                className="space-y-6 p-4"
+                className="mx-auto grid w-full max-w-[1480px] gap-6 p-4 md:p-6 xl:grid-cols-[1fr_360px]"
                 onSubmit={(event) => {
                     event.preventDefault();
                     form.post('/sales');
                 }}
             >
-                <PageHeader title="Create Sale" />
+                <div className="space-y-6 xl:col-span-2"><PageHeader eyebrow="Sales workflow" title="Create Sale" description="Pilih inventory tersedia, atur harga jual, diskon, dan selesaikan transaksi penjualan dengan ringkasan otomatis." /></div>
 
-                <InstructionCard />
+                <div className="space-y-6"><InstructionCard />
 
                 {Object.keys(form.errors).length > 0 && (
                     <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
@@ -97,7 +97,7 @@ export default function Create({ inventory }: any) {
                     </div>
                 )}
 
-                <section className="space-y-4 rounded-lg border p-4">
+                <Surface className="space-y-4">
                     <SectionHeader
                         title="1. Data Pembeli"
                         description="Isi identitas pembeli sederhana untuk tercatat pada transaksi dan invoice penjualan."
@@ -132,9 +132,9 @@ export default function Create({ inventory }: any) {
                             />
                         </Field>
                     </div>
-                </section>
+                </Surface>
 
-                <section className="space-y-4 rounded-lg border p-4">
+                <Surface className="space-y-4">
                     <SectionHeader
                         title="2. Data Transaksi"
                         description="Tanggal dan metode pembayaran dipakai untuk laporan serta dokumen penjualan."
@@ -208,9 +208,9 @@ export default function Create({ inventory }: any) {
                             </select>
                         </Field>
                     </div>
-                </section>
+                </Surface>
 
-                <section className="space-y-4 rounded-lg border p-4">
+                <Surface className="space-y-4">
                     <SectionHeader
                         title="3. Pilih Barang Inventory"
                         description="Hanya barang berstatus available yang muncul. Barang yang sudah dipilih tidak akan ditambahkan dua kali."
@@ -252,7 +252,7 @@ export default function Create({ inventory }: any) {
                                 return (
                                     <div
                                         key={item.inventory_item_id}
-                                        className="space-y-4 rounded-lg border bg-muted/20 p-4"
+                                         className="space-y-4 rounded-2xl border border-border/70 bg-background/45 p-4 shadow-sm"
                                     >
                                         <div className="flex items-center justify-between gap-3">
                                             <div>
@@ -325,9 +325,9 @@ export default function Create({ inventory }: any) {
                             })}
                         </div>
                     )}
-                </section>
+                </Surface></div>
 
-                <section className="rounded-lg border p-4">
+                <aside className="space-y-4 xl:sticky xl:top-24 xl:self-start"><Surface className="space-y-4">
                     <SectionHeader
                         title="4. Ringkasan"
                         description="Pastikan total pembayaran sudah benar sebelum menyimpan transaksi."
@@ -343,9 +343,9 @@ export default function Create({ inventory }: any) {
                         />
                         <Summary label="Total Penjualan" value={money(total)} />
                     </div>
-                </section>
+                </Surface>
 
-                <div className="flex flex-wrap gap-3">
+                <Surface className="flex flex-col gap-3">
                     <Button
                         type="submit"
                         disabled={
@@ -365,7 +365,7 @@ export default function Create({ inventory }: any) {
                     >
                         Save Draft
                     </Button>
-                </div>
+                </Surface></aside>
             </form>
         </>
     );

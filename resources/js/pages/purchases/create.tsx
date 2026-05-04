@@ -1,5 +1,5 @@
 import { Head, useForm } from '@inertiajs/react';
-import { PageHeader, money } from '@/components/gold/shared';
+import { PageHeader, Surface, money } from '@/components/gold/shared';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -69,14 +69,15 @@ export default function Create({ sellers }: any) {
         <>
             <Head title="Create Purchase" />
             <form
-                className="space-y-6 p-4"
+                className="mx-auto grid w-full max-w-[1480px] gap-6 p-4 md:p-6 xl:grid-cols-[1fr_360px]"
                 onSubmit={(event) => {
                     event.preventDefault();
                     form.post('/purchases');
                 }}
             >
-                <PageHeader title="Create Purchase" />
+                <div className="space-y-6 xl:col-span-2"><PageHeader eyebrow="Purchase workflow" title="Create Purchase" description="Catat seller, upload identitas, input barang emas, dan hitung total pembelian dalam alur kerja premium." /></div>
 
+                <div className="space-y-6">
                 <InstructionCard />
 
                 {Object.keys(form.errors).length > 0 && (
@@ -87,7 +88,7 @@ export default function Create({ sellers }: any) {
                     </div>
                 )}
 
-                <section className="space-y-4 rounded-lg border p-4">
+                <Surface className="space-y-4">
                     <SectionHeader
                         title="1. Data Seller"
                         description="Pilih seller lama atau isi nama seller baru. Jika memilih seller lama, kolom nama seller baru boleh dikosongkan."
@@ -161,9 +162,9 @@ export default function Create({ sellers }: any) {
                             />
                         </Field>
                     </div>
-                </section>
+                </Surface>
 
-                <section className="space-y-4 rounded-lg border p-4">
+                <Surface className="space-y-4">
                     <SectionHeader
                         title="2. Data Transaksi"
                         description="Tanggal transaksi dan metode pembayaran dipakai untuk nomor transaksi, laporan, dan dokumen."
@@ -237,9 +238,9 @@ export default function Create({ sellers }: any) {
                             </select>
                         </Field>
                     </div>
-                </section>
+                </Surface>
 
-                <section className="space-y-4 rounded-lg border p-4">
+                <Surface className="space-y-4">
                     <SectionHeader
                         title="3. Data Barang Emas"
                         description="Isi minimal 1 barang. Sistem menghitung estimated price = berat x harga/gram, lalu final price = estimated price - potongan barang."
@@ -258,7 +259,7 @@ export default function Create({ sellers }: any) {
                             return (
                                 <div
                                     key={idx}
-                                    className="space-y-4 rounded-lg border bg-muted/20 p-4"
+                                    className="space-y-4 rounded-2xl border border-border/70 bg-background/45 p-4 shadow-sm"
                                 >
                                     <div className="flex items-center justify-between gap-3">
                                         <div>
@@ -416,7 +417,7 @@ export default function Create({ sellers }: any) {
                                             />
                                         </Field>
                                     </div>
-                                    <div className="grid gap-3 rounded-md bg-background p-3 text-sm md:grid-cols-3">
+                                     <div className="grid gap-3 rounded-xl bg-card/80 p-3 text-sm md:grid-cols-3">
                                         <div>
                                             <span className="text-muted-foreground">
                                                 Estimated Price
@@ -458,9 +459,10 @@ export default function Create({ sellers }: any) {
                     >
                         Add Item
                     </Button>
-                </section>
+                </Surface>
+                </div>
 
-                <section className="rounded-lg border p-4">
+                <aside className="space-y-4 xl:sticky xl:top-24 xl:self-start"><Surface className="space-y-4">
                     <SectionHeader
                         title="4. Ringkasan"
                         description="Pastikan total sudah benar sebelum menyimpan transaksi."
@@ -476,9 +478,9 @@ export default function Create({ sellers }: any) {
                         />
                         <Summary label="Total Pembelian" value={money(total)} />
                     </div>
-                </section>
+                </Surface>
 
-                <div className="flex flex-wrap gap-3">
+                <Surface className="flex flex-col gap-3">
                     <Button
                         type="submit"
                         disabled={form.processing}
@@ -494,7 +496,7 @@ export default function Create({ sellers }: any) {
                     >
                         Save Draft
                     </Button>
-                </div>
+                </Surface></aside>
             </form>
         </>
     );
