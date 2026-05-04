@@ -1,0 +1,5 @@
+import { Head, Link } from '@inertiajs/react';
+import { PageHeader, StatusBadge, money } from '@/components/gold/shared';
+import { Button } from '@/components/ui/button';
+
+export default function Show({ seller }: any) { return <><Head title={seller.name} /><div className="space-y-4 p-4"><PageHeader title={seller.name} /><div className="grid gap-2 text-sm"><div>NIK: {seller.nik}</div><div>Phone: {seller.phone}</div><div>Address: {seller.address}</div>{seller.ktp_photo_url && <img src={seller.ktp_photo_url} className="max-w-sm rounded border" />}</div><Button asChild variant="secondary"><Link href={`/sellers/${seller.id}/edit`}>Edit</Link></Button><h2 className="text-lg font-semibold">Purchase History</h2><table className="w-full text-sm"><tbody>{seller.purchase_transactions?.map((p: any) => <tr key={p.id} className="border-b"><td><Link href={`/purchases/${p.id}`}>{p.purchase_number}</Link></td><td>{money(p.total_amount)}</td><td><StatusBadge status={p.status} /></td></tr>)}</tbody></table></div></>; }

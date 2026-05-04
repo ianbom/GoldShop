@@ -1,0 +1,4 @@
+import { Head, Link, router } from '@inertiajs/react';
+import { PageHeader, StatusBadge } from '@/components/gold/shared';
+import { Button } from '@/components/ui/button';
+export default function Index({ templates }: any) { return <><Head title="Document Templates" /><div className="space-y-4 p-4"><PageHeader title="Document Templates" actionHref="/document-templates/create" actionLabel="Create Template" /><table className="w-full text-sm"><tbody>{templates.data.map((t: any) => <tr key={t.id} className="border-b"><td>{t.name}</td><td>{t.document_type}</td><td><StatusBadge status={t.is_active ? 'available' : 'cancelled'} /></td><td className="text-right"><Button asChild size="sm"><Link href={`/document-templates/${t.id}/edit`}>Edit</Link></Button><Button size="sm" variant="destructive" onClick={() => router.delete(`/document-templates/${t.id}`)}>Delete</Button></td></tr>)}</tbody></table></div></>; }

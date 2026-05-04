@@ -1,0 +1,4 @@
+import { Head, Link } from '@inertiajs/react';
+import { PageHeader, SearchBar, StatusBadge, money } from '@/components/gold/shared';
+import { Button } from '@/components/ui/button';
+export default function Index({ purchases, filters }: any) { return <><Head title="Purchases" /><div className="space-y-4 p-4"><PageHeader title="Purchases" actionHref="/purchases/create" actionLabel="Create Purchase" /><SearchBar defaultValue={filters?.search} /><table className="w-full text-sm"><thead><tr className="border-b text-left"><th>Number</th><th>Seller</th><th>Date</th><th>Total</th><th>Status</th></tr></thead><tbody>{purchases.data.map((p: any) => <tr key={p.id} className="border-b"><td><Link href={`/purchases/${p.id}`}>{p.purchase_number}</Link></td><td>{p.seller?.name}</td><td>{p.transaction_date}</td><td>{money(p.total_amount)}</td><td><StatusBadge status={p.status} /></td></tr>)}</tbody></table></div></>; }

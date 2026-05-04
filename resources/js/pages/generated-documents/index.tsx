@@ -1,0 +1,4 @@
+import { Head, Link, router } from '@inertiajs/react';
+import { PageHeader, StatusBadge } from '@/components/gold/shared';
+import { Button } from '@/components/ui/button';
+export default function Index({ documents }: any) { return <><Head title="Generated Documents" /><div className="space-y-4 p-4"><PageHeader title="Generated Documents" /><table className="w-full text-sm"><tbody>{documents.data.map((d: any) => <tr key={d.id} className="border-b"><td><Link href={`/documents/${d.id}`}>{d.document_number}</Link></td><td>{d.document_type}</td><td><StatusBadge status={d.status} /></td><td className="space-x-2 text-right"><a className="underline" href={d.pdf_url} target="_blank">Open</a><Button size="sm" onClick={() => router.post(`/documents/${d.id}/mark`, { status: 'printed' })}>Printed</Button><Button size="sm" onClick={() => router.post(`/documents/${d.id}/mark`, { status: 'signed' })}>Signed</Button></td></tr>)}</tbody></table></div></>; }

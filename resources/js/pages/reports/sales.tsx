@@ -1,0 +1,3 @@
+import { Head } from '@inertiajs/react';
+import { PageHeader, StatusBadge, money } from '@/components/gold/shared';
+export default function Sales({ rows, total }: any) { return <><Head title="Sales Report" /><div className="space-y-4 p-4"><PageHeader title="Sales Report" /><div className="text-xl font-semibold">Total {money(total)}</div><table className="w-full text-sm"><tbody>{rows.data.map((r: any) => <tr key={r.id} className="border-b"><td>{r.sales_number}</td><td>{r.buyer_name}</td><td>{r.items_count}</td><td>{money(r.total_amount)}</td><td><StatusBadge status={r.status} /></td></tr>)}</tbody></table></div></>; }

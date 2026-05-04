@@ -1,0 +1,5 @@
+import { Head, Link, router } from '@inertiajs/react';
+import { PageHeader, SearchBar } from '@/components/gold/shared';
+import { Button } from '@/components/ui/button';
+
+export default function Index({ sellers, filters }: any) { return <><Head title="Sellers" /><div className="space-y-4 p-4"><PageHeader title="Sellers" actionHref="/sellers/create" actionLabel="Create Seller" /><SearchBar defaultValue={filters?.search} placeholder="Search name, NIK, phone" /><table className="w-full text-sm"><thead><tr className="border-b text-left"><th>Name</th><th>NIK</th><th>Phone</th><th></th></tr></thead><tbody>{sellers.data.map((s: any) => <tr key={s.id} className="border-b"><td>{s.name}</td><td>{s.nik}</td><td>{s.phone}</td><td className="space-x-2 py-2 text-right"><Button asChild size="sm" variant="outline"><Link href={`/sellers/${s.id}`}>View</Link></Button><Button asChild size="sm" variant="secondary"><Link href={`/sellers/${s.id}/edit`}>Edit</Link></Button><Button size="sm" variant="destructive" onClick={() => router.delete(`/sellers/${s.id}`)}>Delete</Button></td></tr>)}</tbody></table></div></>; }

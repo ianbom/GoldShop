@@ -1,0 +1,4 @@
+import { Head, Link } from '@inertiajs/react';
+import { PageHeader, StatusBadge, money } from '@/components/gold/shared';
+import { Button } from '@/components/ui/button';
+export default function Show({ item }: any) { return <><Head title={item.sku} /><div className="space-y-4 p-4"><PageHeader title={item.sku} /><StatusBadge status={item.status} />{item.product_photo_url && <img src={item.product_photo_url} className="max-w-sm rounded border" />}<div>{item.item_name} {item.gold_carat}K {item.weight_gram}gr</div><div>Purchase: {money(item.purchase_price)} Selling: {money(item.selling_price)}</div><div>Source: {item.purchase_item?.purchase_transaction?.purchase_number} - {item.purchase_item?.purchase_transaction?.seller?.name}</div><Button asChild><Link href={`/inventory/${item.id}/edit`}>Edit</Link></Button></div></>; }

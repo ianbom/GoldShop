@@ -1,0 +1,5 @@
+import { Head, useForm } from '@inertiajs/react';
+import { PageHeader } from '@/components/gold/shared';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+export default function Edit({ item }: any) { const form = useForm({ selling_price: item.selling_price ?? '', status: item.status, notes: item.notes ?? '' }); return <><Head title="Edit Inventory" /><form className="space-y-4 p-4" onSubmit={e => { e.preventDefault(); form.put(`/inventory/${item.id}`); }}><PageHeader title={`Edit ${item.sku}`} /><Input type="number" value={form.data.selling_price} onChange={e => form.setData('selling_price', e.target.value)} /><select className="rounded-md border p-2" value={form.data.status} onChange={e => form.setData('status', e.target.value)}>{['available','sold','lost','damaged','melted','cancelled'].map(s => <option key={s}>{s}</option>)}</select><Input value={form.data.notes} onChange={e => form.setData('notes', e.target.value)} /><Button>Save</Button></form></>; }

@@ -1,0 +1,3 @@
+import { Head, Link } from '@inertiajs/react';
+import { PageHeader, SearchBar, StatusBadge, money } from '@/components/gold/shared';
+export default function Index({ sales, filters }: any) { return <><Head title="Sales" /><div className="space-y-4 p-4"><PageHeader title="Sales" actionHref="/sales/create" actionLabel="Create Sale" /><SearchBar defaultValue={filters?.search} /><table className="w-full text-sm"><tbody>{sales.data.map((s: any) => <tr key={s.id} className="border-b"><td><Link href={`/sales/${s.id}`}>{s.sales_number}</Link></td><td>{s.buyer_name}</td><td>{money(s.total_amount)}</td><td><StatusBadge status={s.status} /></td></tr>)}</tbody></table></div></>; }
